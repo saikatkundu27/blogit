@@ -359,6 +359,10 @@ app.get("/home/:category", function (req, res) {
 });
 
 //home routes
+app.get("/",function(req,res)
+{
+  res.redirect("/home");
+})
 app.get("/home", function (req, res) {
   FoodBlog.find({}, function (err, foodBlogs) {
     if (!err) {
