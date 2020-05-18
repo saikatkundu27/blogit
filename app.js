@@ -40,7 +40,7 @@ var foodcount = 0,
 var multer = require("multer");
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __dirname + "public/images/temp_uploads/");
+    cb(null, __dirname + "/public/images/temp_uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + "-" + Date.now() + ".jpg");
