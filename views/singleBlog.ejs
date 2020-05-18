@@ -1,0 +1,63 @@
+<%- include("partials/header"); -%>
+
+<div class="category_body">
+    <div class="container blog_border">
+        <div class="row">
+            <div class="col-12">
+                <div style="text-align: right;">
+          
+                    <a href="/compose/<%=posts[index].cat %>/<%= posts[index]._id %>" class="edit_icon">
+                        <i class="fa fa-pencil-alt " aria-hidden="true"></i></a>
+                       <!-- <a href="" class="delete_icon"><i class="fa fa-trash" aria-hidden="true"></i>
+                       </a>  -->
+                
+            </div> 
+                <div class="author_info single_blog_author"> 
+                    <p >By <%= posts[index].name +" "; %> <span style="margin: 0 2.5px;">  •  </span>  <%= " "+posts[index].timestamp; %> </p>
+                   
+                </div>
+               
+                <p class="blog_heading single_blog_heading" ><%= posts[index].title; %></p>
+               
+                <p class="blog_intro single_blog_intro" ><i class="fas fa-quote-left " style="margin-right:5px ;"></i> <%= posts[index].intro %> </p>
+               
+            </div>
+
+            <div class="col-12">
+               
+                
+                  <% var name= posts[index].image;  %>
+               
+                <img src= <%= name %> alt="picture" class="blog_image   single_blog_image">
+             
+                
+            </div>
+
+
+            <div class="col-12">
+                <p class="blog_message">
+                    <%= posts[index].message %>
+                </p>
+                <div class="single_blog_btn">
+                   <% var link= "/home/"+ href %>
+                    <a href= <%= link %> class="myReadMoreButton compose-headings " >← Go Back</a>
+                </div>
+              
+                
+            <hr>
+            </div>
+
+            
+
+          
+
+
+        </div>
+
+    </div>
+    
+</div>
+
+  
+
+<%- include("partials/footer") -%>

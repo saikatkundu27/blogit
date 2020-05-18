@@ -1,0 +1,155 @@
+<%- include("partials/header"); -%>
+
+<div class="heading  ">
+
+    <div>
+        <h1>Welcome to our Blog!</h1>
+        <h3>write to your heart's content</h3>
+        <a href="#latest-blogs" class="myButton">READ BLOGS → </a>
+    </div>
+
+</div>
+
+<div id="latest-blogs">
+
+    <div class="category_body ">
+        <h1 class="blog_heading" style="text-align: center;">Latest Blogs</h1>
+        <% if(foodBlogs.length > 0){ %>
+        <div class="container">
+            <div class="row each_blog">
+                <div class="col-12 col-md-6 fill-image">
+
+                    <% var name= foodBlogs[foodBlogs.length-1].image;  %>
+                    <img src=<%= name %> alt="picture" class="blog_image">
+
+                </div>
+
+                <div class="col-12 col-md-6 blog_element ">
+                    <div style="text-align: right;">
+          
+                        <a href="/compose/<%= foodBlogs[foodBlogs.length-1].cat %>/<%= foodBlogs[foodBlogs.length-1]._id %>" class="edit_icon">
+                            <i class="fa fa-pencil-alt " aria-hidden="true"></i></a>
+                           <!-- <a href="" class="delete_icon"><i class="fa fa-trash" aria-hidden="true"></i>
+                           </a>  -->
+                    
+                </div> 
+                    <div class="author_info">
+                        <p>By <%= foodBlogs[foodBlogs.length-1].name; %> <span style="margin: 0 2.5px;"> • </span> Food
+                        </p>
+                        <p> <%= foodBlogs[foodBlogs.length-1].timestamp; %> </p>
+                    </div>
+
+                    <p class="blog_heading"><%= foodBlogs[foodBlogs.length-1].title; %></p>
+
+                    <p class="blog_intro"><%=foodBlogs[foodBlogs.length-1].intro.substring(0,200) + "..." %> </p>
+
+                    <hr>
+                    <div class="btn_align">
+                        <% var blogid="food" +(foodBlogs.length-1);%>
+                        <%  var href= "/home/food/"+blogid; %>
+                        <a href=<%= href %> class="myReadMoreButton compose-headings">Read more → </a>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <hr class="homebreak">
+        </div>
+        <% } %>
+        <% if(travelBlogs.length > 0){ %>
+        <div class="container">
+            <div class="row each_blog">
+                <div class="col-12 col-md-6 fill-image">
+
+                    <% var name= travelBlogs[travelBlogs.length-1].image;  %>
+                    <img src=<%= name %> alt="picture" class="blog_image">
+
+                </div>
+
+                <div class="col-12 col-md-6 blog_element ">
+                    <div style="text-align: right;">
+          
+                        <a href="/compose/<%=travelBlogs[travelBlogs.length-1].cat %>/<%= travelBlogs[travelBlogs.length-1]._id %>" class="edit_icon">
+                            <i class="fa fa-pencil-alt " aria-hidden="true"></i></a>
+                           <!-- <a href="" class="delete_icon"><i class="fa fa-trash" aria-hidden="true"></i>
+                           </a>  -->
+                    
+                </div> 
+                    <div class="author_info">
+                        <p>By <%= travelBlogs[travelBlogs.length-1].name; %> <span style="margin: 0 2.5px;"> • </span>
+                            Travel</p>
+                        <p> <%= travelBlogs[travelBlogs.length-1].timestamp; %> </p>
+                    </div>
+
+                    <p class="blog_heading"><%= travelBlogs[travelBlogs.length-1].title; %></p>
+
+                    <p class="blog_intro"><%=travelBlogs[travelBlogs.length-1].intro.substring(0,200) + "..." %> </p>
+
+                    <hr>
+                    <div class="btn_align">
+                        <% var blogid="travel" +(travelBlogs.length-1);%>
+                        <%  var href= "/home/travel/"+blogid; %>
+                        <a href=<%= href %> class="myReadMoreButton compose-headings">Read more → </a>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <hr class="homebreak">
+        </div>
+        <% } %>
+        <% if(fitnessBlogs.length > 0){ %>
+        <div class="container">
+            <div class="row each_blog">
+                <div class="col-12 col-md-6 fill-image">
+
+                    <% var name= fitnessBlogs[fitnessBlogs.length-1].image;  %>
+                    <img src=<%= name %> alt="picture" class="blog_image">
+
+                </div>
+
+                <div class="col-12 col-md-6 blog_element ">
+                    <div style="text-align: right;">
+          
+                        <a href="/compose/<%=fitnessBlogs[travelBlogs.length-1].cat %>/<%= fitnessBlogs[travelBlogs.length-1]._id %>" class="edit_icon">
+                            <i class="fa fa-pencil-alt " aria-hidden="true"></i></a>
+                           <!-- <a href="" class="delete_icon"><i class="fa fa-trash" aria-hidden="true"></i>
+                           </a>  -->
+                    
+                </div> 
+                    
+                    <div class="author_info">
+                        <p>By <%= fitnessBlogs[fitnessBlogs.length-1].name; %><span style="margin: 0 2.5px;"> • </span>
+                            Fitness</p>
+                        <p> <%= fitnessBlogs[fitnessBlogs.length-1].timestamp; %> </p>
+                    </div>
+
+                    <p class="blog_heading"><%= fitnessBlogs[fitnessBlogs.length-1].title; %></p>
+
+                    <p class="blog_intro"><%=fitnessBlogs[fitnessBlogs.length-1].intro.substring(0,200) + "..." %> </p>
+
+                    <hr>
+                    <div class="btn_align">
+                        <% var blogid="fitness" +(fitnessBlogs.length-1);%>
+                        <%  var href= "/home/fitness/"+blogid; %>
+                        <a href=<%= href %> class="myReadMoreButton compose-headings">Read more → </a>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <% } %>
+
+
+    </div>
+</div>
+
+<%- include("partials/footer") -%>

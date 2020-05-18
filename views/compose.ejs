@@ -1,0 +1,93 @@
+
+<%- include('partials/header'); -%>
+<script>
+  function myFunction (){
+    var d=new Date();
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d); 
+    const date= da+" "+ mo+" "+ye;
+     $("#date").val(date);
+      }
+
+</script>
+<div class="blog-form">
+    <div class="container">
+        <form class="form-horizontal" method="POST" action="/compose" enctype="multipart/form-data" onsubmit="myFunction()">
+
+          <input type="hidden" name="_id" value="<%= post._id%>">
+          
+          <input type="hidden" name="oldcode" value="<%= post.code %>">
+            <div class="form-group">
+              <label class="control-label col-sm-2 compose-headings" for="Name">Author:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" placeholder="Enter Name" value="<%=post.name%>" autocomplete="off" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label  class="control-label col-sm-4 compose-headings" for="cars">Choose a category:</label>
+              <div class="col-sm-10">
+                <select id="cats" name="cats" class="form-control" required>
+                  <option value="food">Food</option>
+                  <option value="travel">Travel</option>
+                  <option value="fitness">Fitness</option>
+                 </select>
+              </div>
+            </div>
+           
+           
+            <div class="form-group">
+              <label class="control-label col-sm-2 compose-headings" for="Title">Title:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" placeholder="Give a Title" autocomplete="off" value="<%=post.title%>"  required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2 compose-headings" for="Intro">Introduction:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="intro" placeholder="Rock that Intro" autocomplete="off" value="<%= post.intro %>" required>
+              </div>
+            </div>
+
+            
+            <div class="form-group">
+              <label class="control-label col-sm-2 compose-headings" for="Content">Content:</label>
+              <div class="col-sm-10">
+                <textarea name="message" placeholder="Add your blog's content, you can drag to resize the box :)"  class="form-control" style="width: inherit;" ><%= post.message %></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-2 compose-headings" for="Password">Authentication Code:</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" name="code" placeholder="This 4 digit code will be required to edit the blog " autocomplete="off" maxlength="4" size="4" required>
+               
+              </div>
+            </div>
+         <div style="overflow-x: hidden;">
+        <label  class="control-label col-sm-4 compose-headings" for="myfile" > Select cover image( only .png or .jpg)</label> 
+        <br>
+       
+            <div class="col-sm-10">
+             
+               <input type="file" id="myfile"  name="cover_image"  required>
+
+            
+            </div>
+            </div> 
+
+            <input type="hidden" name="date" id="date">
+         
+            <div class="form-group publish-button">
+              <div class="col-sm-offset-2 col-sm-10" style="max-width: 100%;">
+                <button type="submit" class="btn btn-dark compose-headings " >Publish</button>
+              </div>
+            </div>
+          </form>
+    </div>
+    
+</div>
+
+
+<%- include("partials/footer"); -%> 

@@ -1,0 +1,128 @@
+/*var foodBlogs = [
+  {
+    name: "Saikat",
+    cat: "food",
+    title: "My First Blog",
+    intro:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consequat ut felis eu aliquam. Suspendisse lacus eros, luctus non pellentesque sit amet, tincidunt nec elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed volutpat quam est, quis ultricies ante interdum et. Nunc cursus velit mi, at mattis arcu aliquam id. Maecenas ultrices magna id mi accumsan convallis. Integer euismod urna sed auctor vestibulum. Donec lobortis malesuada tristique.",
+    message:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus vehicula aliquam. Mauris lacinia dignissim elit, maximus aliquet ligula pellentesque ac. In in finibus ipsum. Ut facilisis ipsum non posuere viverra. Nunc aliquet egestas posuere. Morbi facilisis nunc vel augue consequat, sit amet convallis diam viverra. Aenean vitae aliquet ipsum.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam quam lacus, fermentum quis ultrices posuere, commodo id sapien. Donec accumsan lobortis dui, eget lacinia magna semper a. Mauris a quam sem. Praesent rhoncus lobortis metus, ac bibendum sem ullamcorper eget. Vestibulum ac ante cursus, suscipit magna et, porta ligula. Nulla fringilla erat et justo ultricies, quis pellentesque magna efficitur. Quisque iaculis pellentesque cursus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce mattis porttitor leo nec convallis. Vestibulum at semper dui. Donec hendrerit augue at leo suscipit, sollicitudin suscipit purus molestie. Nulla sit amet sapien aliquet augue mattis malesuada sit amet quis lorem.Praesent eleifend mi ut arcu consectetur gravida. Phasellus vehicula pretium posuere. Fusce pellentesque ut nunc tempor posuere. Ut sodales ullamcorper turpis quis porttitor. Proin lacinia blandit leo a volutpat. Aenean molestie quis ipsum quis posuere. Vestibulum sed leo sodales, tristique justo id, maximus magna. Duis vel lacus quis ante lacinia commodo. Sed non massa ac nisi maximus posuere. Duis ullamcorper id leo a varius. Nulla rutrum felis purus, non hendrerit lectus tincidunt ac. Duis condimentum felis fermentum leo congue, quis condimentum velit ultricies. Vivamus ac feugiat elit. Donec ex lacus, molestie sit amet lobortis eu, congue sed ipsum. In pellentesque elit id enim posuere imperdiet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce accumsan dui ex, sit amet pellentesque nunc sagittis et. Suspendisse sed convallis magna. Vivamus ac dapibus nunc, non dictum mi. Proin venenatis semper hendrerit. Sed at nisl massa. Donec porta, dui eget aliquam lacinia, nunc enim venenatis neque, ac aliquam tortor justo vitae diam. Etiam purus sem, aliquam vitae ex id, tempor accumsan nulla. Mauris luctus fermentum quam, eu molestie augue hendrerit vitae. Morbi sit amet maximus ex. Cras posuere pharetra tincidunt. Curabitur et orci est. Praesent ut justo lobortis, aliquet purus et, facilisis odio. Nunc luctus ipsum quis lectus posuere iaculis.",
+    timestamp: "Feb 18",
+    image: "",
+  },
+  {
+    name: "Saikat",
+    cat: "food",
+    title: "My First Blog",
+    intro:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consequat ut felis eu aliquam. Suspendisse lacus eros, luctus non pellentesque sit amet, tincidunt nec elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed volutpat quam est, quis ultricies ante interdum et. Nunc cursus velit mi, at mattis arcu aliquam id. Maecenas ultrices magna id mi accumsan convallis. Integer euismod urna sed auctor vestibulum. Donec lobortis malesuada tristique.",
+    message:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus vehicula aliquam. Mauris lacinia dignissim elit, maximus aliquet ligula pellentesque ac. In in finibus ipsum. Ut facilisis ipsum non posuere viverra. Nunc aliquet egestas posuere. Morbi facilisis nunc vel augue consequat, sit amet convallis diam viverra. Aenean vitae aliquet ipsum.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam quam lacus, fermentum quis ultrices posuere, commodo id sapien. Donec accumsan lobortis dui, eget lacinia magna semper a. Mauris a quam sem. Praesent rhoncus lobortis metus, ac bibendum sem ullamcorper eget. Vestibulum ac ante cursus, suscipit magna et, porta ligula. Nulla fringilla erat et justo ultricies, quis pellentesque magna efficitur. Quisque iaculis pellentesque cursus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce mattis porttitor leo nec convallis. Vestibulum at semper dui. Donec hendrerit augue at leo suscipit, sollicitudin suscipit purus molestie. Nulla sit amet sapien aliquet augue mattis malesuada sit amet quis lorem.Praesent eleifend mi ut arcu consectetur gravida. Phasellus vehicula pretium posuere. Fusce pellentesque ut nunc tempor posuere. Ut sodales ullamcorper turpis quis porttitor. Proin lacinia blandit leo a volutpat. Aenean molestie quis ipsum quis posuere. Vestibulum sed leo sodales, tristique justo id, maximus magna. Duis vel lacus quis ante lacinia commodo. Sed non massa ac nisi maximus posuere. Duis ullamcorper id leo a varius. Nulla rutrum felis purus, non hendrerit lectus tincidunt ac. Duis condimentum felis fermentum leo congue, quis condimentum velit ultricies. Vivamus ac feugiat elit. Donec ex lacus, molestie sit amet lobortis eu, congue sed ipsum. In pellentesque elit id enim posuere imperdiet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce accumsan dui ex, sit amet pellentesque nunc sagittis et. Suspendisse sed convallis magna. Vivamus ac dapibus nunc, non dictum mi. Proin venenatis semper hendrerit. Sed at nisl massa. Donec porta, dui eget aliquam lacinia, nunc enim venenatis neque, ac aliquam tortor justo vitae diam. Etiam purus sem, aliquam vitae ex id, tempor accumsan nulla. Mauris luctus fermentum quam, eu molestie augue hendrerit vitae. Morbi sit amet maximus ex. Cras posuere pharetra tincidunt. Curabitur et orci est. Praesent ut justo lobortis, aliquet purus et, facilisis odio. Nunc luctus ipsum quis lectus posuere iaculis.",
+    timestamp: "Feb 18",
+    image: "",
+  },
+];*/
+
+
+
+
+
+
+
+
+
+function updateBlog(req, res) { // start of function
+
+  if (req.body.code === req.body.oldcode) {
+
+    var ext = path.extname(req.file.originalname).toLowerCase();
+    const tempPath = req.file.path;
+    const targetPath = __dirname + "/public/images/uploads/" + Date.now() + ext;
+    if (ext === ".png" || ext === ".jpg") {
+      fs.rename(tempPath, targetPath, (err) => {
+        if (err) {
+          return handleError(err, res);
+        }
+  
+        if (res.status(200)) {
+          var targetPath_mod = targetPath.substring(
+            targetPath.length - 33,
+            targetPath.length
+          );
+          
+  
+            req.body.image=targetPath;
+
+            if (req.body.cats === "food") {
+              console.log(req.body);
+              
+              FoodBlog.findOneAndUpdate( { _id: req.body._id }, req.body,{ new: true }, function (err, updatedBlog) {
+                if (!err) {
+                    res.redirect("/home/food");
+                  }
+                   else console.log(err);
+                });
+              }
+    
+  
+            res.redirect("/home/food");
+          }
+  
+          if (req.body.cats === "travel") {
+            const newBlog = new TravelBlog({
+              name: req.body.name,
+              cat: req.body.cats,
+              title: req.body.title,
+              intro: req.body.intro,
+              message: req.body.message,
+              timestamp: req.body.date,
+              image: targetPath_mod,
+              extension: ext,
+              code: req.body.code,
+            });
+            newBlog.save(function (err) {
+              if (err) return handleError(err);
+              // saved!
+            });
+  
+            res.redirect("/home/travel");
+          }
+  
+          if (req.body.cats === "fitness") {
+            const newBlog = new FitnessBlog({
+              name: req.body.name,
+              cat: req.body.cats,
+              title: req.body.title,
+              intro: req.body.intro,
+              message: req.body.message,
+              timestamp: req.body.date,
+              image: targetPath_mod,
+              extension: ext,
+              code: req.body.code,
+            });
+  
+            newBlog.save(function (err) {
+              if (err) return handleError(err);
+              // saved!
+            });
+  
+            res.redirect("/home/fitness");
+          }
+        
+      });
+    }
+    else {
+      fs.unlink(tempPath, (err) => {
+        if (err) return handleError(err, res);
+  
+        if (res.status(403)) {
+          res.render("wrong_file");
+        }
+      });
+    }
+  }
+
+     else
+    res.render("wrong_file");
+     
+  }//end of func

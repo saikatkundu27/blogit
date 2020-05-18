@@ -1,0 +1,59 @@
+<%- include("partials/header"); -%>
+
+
+<div class="category_body ">
+    <div class="container compose_btn">
+        <a href="/compose" class="myReadMoreButton ">Write Your Own Blog! </a>
+   
+    </div>
+      
+ 
+        <% for( var j=posts.length -1;j>=0;j--){ %>
+     
+    <div class="container">
+        <div class="row each_blog">
+            <div class="col-12 col-md-6 fill-image">
+              
+                <% var name= posts[j].image; %>
+                <img src= <%= name %> alt="picture" class="blog_image">
+              
+            </div>
+
+            <div class="col-12 col-md-6 blog_element " >
+               <div style="text-align: right;">
+          
+                        <a href="/compose/<%=posts[j].cat %>/<%= posts[j]._id %>" class="edit_icon">
+                            <i class="fa fa-pencil-alt " aria-hidden="true"></i></a>
+                           <!-- <a href="" class="delete_icon"><i class="fa fa-trash" aria-hidden="true"></i>
+                           </a>  -->
+                    
+                </div> 
+                <div class="author_info"> 
+                   <% var category=posts[j].cat.substring(0,1).toUpperCase() + posts[j].cat.substring(1);%>
+                  <p >By <%= posts[j].name; %> <span style="margin: 0 2.5px;"> • </span><%=  category %> </p>
+                    <p> <%= posts[j].timestamp; %> </p>
+                </div>
+               
+                <p class="blog_heading"><%= posts[j].title; %></p>
+               
+                <p class="blog_intro"><%= posts[j].intro.substring(0,200) + "..." %> </p>
+               
+                <hr>
+                <div class="btn_align">
+                    <% var blogid= posts[j].cat + j;%>
+                    <%  var href= "/home/"+posts[j].cat+"/"+blogid; %>
+                    <a href=<%= href %> class="myReadMoreButton compose-headings">Read more → </a>
+                </div>
+                
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <% } %>
+   
+</div>
+
+<%- include("partials/footer") -%>
