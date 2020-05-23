@@ -98,7 +98,17 @@ body {
 }
 .homebreak
 {
+    
     width: 60%;
+}
+.home-btn
+{
+    padding: 8% 2% 2%;
+    padding-top: 8%;
+    background-color: #f7f7f7;
+}
+.home-btn .compose_btn{
+    padding-bottom: 5%;
 }
 /******* footer css ********/
 #footer {
