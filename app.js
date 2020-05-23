@@ -4,12 +4,23 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
-
-mongoose.connect("mongodb+srv://admin-saikat:test-123@cluster0-wpul9.mongodb.net/blogDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-   useFindAndModify: false 
+const cloudinary = require("cloudinary");
+const CLOUDINARY_URL =
+  "cloudinary://674589559854428:R_ZbJVThkYS3y5LdBFYv7Note9A@blog-image";
+cloudinary.config({
+  cloud_name: "blog-image",
+  api_key: "674589559854428",
+  api_secret: "R_ZbJVThkYS3y5LdBFYv7Note9A",
 });
+
+mongoose.connect(
+  "mongodb+srv://admin-saikat:test-123@cluster0-wpul9.mongodb.net/blogDB",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 
 /*mongoose.connect("mongodb://localhost:27017/blogDB", {
   useNewUrlParser: true,
@@ -67,6 +78,92 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
+
+
+
+function updateImageURL(targetPath_mod,req,res,source)
+{
+  /*console.log(source);
+  console.log(targetPath_mod);
+  console.log(req);*/
+  
+  var new_url;
+
+          cloudinary.uploader.upload("public" + targetPath_mod, function (
+            result,
+            error
+          ) {
+            if (!error) {
+              //console.log(result);
+               new_url=result.secure_url;
+            }
+          });
+  setTimeout(function(){
+    req.image=new_url;
+   /* console.log("new req");
+    console.log(req);*/
+    
+    
+    if (req.cat === "food") {
+      
+      FoodBlog.findOneAndUpdate(
+        { _id: req._id },
+        req,
+        { new: true },
+        function (err, updatedBlog) {
+          if (!err) {
+            console.log(updatedBlog);
+            
+            if (updatedBlog === null) 
+              res.render("wrong_file", {
+                title:
+                  "Something went Wrong :(",
+              });
+          }
+           else console.log(err);
+        }
+      );
+    }//food
+    
+    if (req.cat === "travel") {
+      TravelBlog.findOneAndUpdate(
+        { _id: req._id },
+        req,
+        { new: true },
+        function (err, updatedBlog) {
+          if (!err) {
+            if (updatedBlog === null) 
+              res.render("wrong_file", {
+                title:
+                  "Change of category not allowed, create a new Blog instead",
+              });
+          } else console.log(err);
+        }
+      );
+    }
+
+    if (req.cat === "fitness") {
+      FitnessBlog.findOneAndUpdate(
+        { _id: req._id },
+        req,
+        { new: true },
+        function (err, updatedBlog) {
+          if (!err) {
+            if (updatedBlog === null) 
+              res.render("wrong_file", {
+                title:
+                  "Change of category not allowed, create a new Blog instead",
+              });
+          } else console.log(err);
+        }
+      );
+    }
+
+
+
+   }, 10000);
+}
+
 function insertBlog(req, res) {
   var ext = path.extname(req.file.originalname).toLowerCase();
   const tempPath = req.file.path;
@@ -84,10 +181,15 @@ function insertBlog(req, res) {
           targetPath.length
         );
 
-        if (req.body.cats === "food") {
+       
+       
+        //updateImageURL(targetPath_mod,req,res);
+       
+
+        if (req.body.cat === "food") {
           const newBlog = new FoodBlog({
             name: req.body.name,
-            cat: req.body.cats,
+            cat: req.body.cat,
             title: req.body.title,
             intro: req.body.intro,
             message: req.body.message,
@@ -96,18 +198,23 @@ function insertBlog(req, res) {
             extension: ext,
             code: req.body.code,
           });
-          newBlog.save(function (err) {
+          newBlog.save(function (err,newBlog) {
             if (err) return handleError(err);
+            else
+            {
+             updateImageURL(targetPath_mod,newBlog,res,"insert");
+            }
+            
             // saved!
           });
 
           res.redirect("/home/food");
         }
 
-        if (req.body.cats === "travel") {
+        if (req.body.cat === "travel") {
           const newBlog = new TravelBlog({
             name: req.body.name,
-            cat: req.body.cats,
+            cat: req.body.cat,
             title: req.body.title,
             intro: req.body.intro,
             message: req.body.message,
@@ -116,18 +223,24 @@ function insertBlog(req, res) {
             extension: ext,
             code: req.body.code,
           });
-          newBlog.save(function (err) {
+          newBlog.save(function (err,newBlog) {
             if (err) return handleError(err);
+            else
+            {
+             updateImageURL(targetPath_mod,newBlog,res,"insert");
+            }
+            
+            
             // saved!
           });
 
           res.redirect("/home/travel");
         }
 
-        if (req.body.cats === "fitness") {
+        if (req.body.cat === "fitness") {
           const newBlog = new FitnessBlog({
             name: req.body.name,
-            cat: req.body.cats,
+            cat: req.body.cat,
             title: req.body.title,
             intro: req.body.intro,
             message: req.body.message,
@@ -137,8 +250,13 @@ function insertBlog(req, res) {
             code: req.body.code,
           });
 
-          newBlog.save(function (err) {
+          newBlog.save(function (err,newBlog) {
             if (err) return handleError(err);
+            else
+            {
+             updateImageURL(targetPath_mod,newBlog,res,"insert");
+            }
+            
             // saved!
           });
 
@@ -151,15 +269,17 @@ function insertBlog(req, res) {
       if (err) return handleError(err, res);
 
       if (res.status(403)) {
-        res.render("wrong_file",{title:"Please upload .png or .jpg files :("});
+        res.render("wrong_file", {
+          title: "Please upload .png or .jpg files :(",
+        });
       }
     });
   }
 }
 
 function updateBlog(req, res) {
-  if (req.body.code === req.body.oldcode) {
 
+  if (req.body.code === req.body.oldcode) {
     var ext = path.extname(req.file.originalname).toLowerCase();
     const tempPath = req.file.path;
     const targetPath = __dirname + "/public/images/uploads/" + Date.now() + ext;
@@ -175,75 +295,83 @@ function updateBlog(req, res) {
             targetPath.length
           );
 
-          req.body.image = targetPath_mod;
-         
+          req.body.image=targetPath_mod;
 
-          if (req.body.cats === "food") {
-           
 
+        
+         updateImageURL(targetPath_mod,req.body,res,"update");
+        
+        
+
+          if (req.body.cat === "food") {
             FoodBlog.findOneAndUpdate(
               { _id: req.body._id },
               req.body,
               { new: true },
               function (err, updatedBlog) {
                 if (!err) {
-                  if(updatedBlog!== null)
-                  res.redirect("/home/food");
+                  if (updatedBlog !== null) res.redirect("/home/food");
                   else
-                  res.render("wrong_file",{title: "Change of category not allowed, create a new Blog instead"})
+                    res.render("wrong_file", {
+                      title:
+                        "Change of category not allowed, create a new Blog instead",
+                    });
                 } else console.log(err);
               }
             );
           }
-          
-        if (req.body.cats === "travel") {
-          
-          TravelBlog.findOneAndUpdate(
-            { _id: req.body._id },
-            req.body,
-            { new: true },
-            function (err, updatedBlog) {
-              if (!err) {
-                if(updatedBlog!== null)
-                res.redirect("/home/travel");
-                else
-                res.render("wrong_file",{title: "Change of category not allowed, create a new Blog instead"})
-              } else console.log(err);
-            }
-          );
-        
-        }
 
-        if (req.body.cats === "fitness") {
+          if (req.body.cat === "travel") {
+            TravelBlog.findOneAndUpdate(
+              { _id: req.body._id },
+              req.body,
+              { new: true },
+              function (err, updatedBlog) {
+                if (!err) {
+                  if (updatedBlog !== null) res.redirect("/home/travel");
+                  else
+                    res.render("wrong_file", {
+                      title:
+                        "Change of category not allowed, create a new Blog instead",
+                    });
+                } else console.log(err);
+              }
+            );
+          }
+
+          if (req.body.cat === "fitness") {
+            FitnessBlog.findOneAndUpdate(
+              { _id: req.body._id },
+              req.body,
+              { new: true },
+              function (err, updatedBlog) {
+                if (!err) {
+                  if (updatedBlog !== null) res.redirect("/home/fitness");
+                  else
+                    res.render("wrong_file", {
+                      title:
+                        "Change of category not allowed, create a new Blog instead",
+                    });
+                } else console.log(err);
+              }
+            );
+          }
+
          
-          FitnessBlog.findOneAndUpdate(
-            { _id: req.body._id },
-            req.body,
-            { new: true },
-            function (err, updatedBlog) {
-              if (!err) {
-                if(updatedBlog!== null)
-                res.redirect("/home/fitness");
-                else
-                res.render("wrong_file",{title: "Change of category not allowed, create a new Blog instead"})
-              } else console.log(err);
-            }
-          );
-        }
-
         } //code:200
-
       }); // rename
     } else {
       fs.unlink(tempPath, (err) => {
         if (err) return handleError(err, response);
 
         if (res.status(403)) {
-          res.render("wrong_file",{title:"Please upload .png or .jpg files :("});
+          res.render("wrong_file", {
+            title: "Please upload .png or .jpg files :(",
+          });
         }
       });
     }
-  } else res.render("wrong_file",{title: "Authentication Failed"});
+  } else res.render("wrong_file", { title: "Authentication Failed" });
 }
 
 //compose routes
@@ -359,10 +487,9 @@ app.get("/home/:category", function (req, res) {
 });
 
 //home routes
-app.get("/",function(req,res)
-{
+app.get("/", function (req, res) {
   res.redirect("/home");
-})
+});
 app.get("/home", function (req, res) {
   FoodBlog.find({}, function (err, foodBlogs) {
     if (!err) {
