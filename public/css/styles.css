@@ -137,6 +137,14 @@ body {
     margin-bottom: 0px;
     font-size: 15px;
 }
+.icon_link
+{
+    color: #eeeeee;
+}
+.footer-icons a :hover{
+    color:#00BCF2
+}
+
 
 /***** home page middle ******/
 #latest-blogs
